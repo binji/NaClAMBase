@@ -1,42 +1,19 @@
 NaClAMBase
 ==========
 
-NaCl Acceleration Module Base.
+This is a modified version of https://github.com/johnmccutchan/NaClAMBase.
+Please look there for more information.
 
-Acceleration Modules allow JavaScript developers to use and interact with C/C++ code.
+I've removed a lot of extra stuff that I don't need.
 
-Try out a live demo here:
+Why?
+----
 
-https://chrome.google.com/webstore/detail/oijilmepnojdffifoaoaeaemcnmcleld/
+* I'm using a prebuilt bullet from naclports, so I don't need an extra copy of
+the bullet sources.
 
-Read more here:
+* I'm using the NaCl SDK Makefile to build everything, so I don't need Visual
+  Studio or premake projects.
 
-http://www.johnmccutchan.com/2012/10/bullet-native-client-acceleration-module.html
-
-Example
-========
-
-See NaClAMTest/NaClAMTest.cpp for C++ code
-
-See NaClAMTest/NaClAMTest.js for JS code
-
-
-Build Systems
-==============
-
-The preferred build system is Visual Studio based.
-
-premake is offered as a limited alternative, to build run the following:
-
-```
-premake4 --file=premake32.lua gmake
-make -R
-premake4 --file=premake64.lua gmake
-make -R
-```
-
-To test:
-
-```
-python ./http.py
-```
+* I need to make some changes to the JavaScript to use in the NaCl SDK PNaCl /
+  pepper.js demos.
