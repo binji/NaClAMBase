@@ -142,12 +142,8 @@ function reloadScene() {
     loadWorld(lastSceneDescription);
 }
 
-function $(id) {
-  return document.getElementById(id);
-}
-
 function init() {
-  var rendererContainer = $('rendererContainer');
+  var rendererContainer = document.getElementById('rendererContainer');
   var rcW = rendererContainer.clientWidth;
   var rcH = rendererContainer.clientHeight;
 
@@ -187,7 +183,7 @@ function init() {
   renderer.sortObjects = false;
   renderer.setSize( rcW, rcH );
   lastRendererWidth = rcW;
-  lastRendererWidth = rcH;
+  lastRendererHeight = rcH;
 
   renderer.shadowMapEnabled = true;
   renderer.shadowMapSoft = true;
@@ -204,12 +200,13 @@ function init() {
     randomCube2000: load2000RandomCubes
   };
 
-  for (var id in idFuncHash) {
-    var func = idFuncHash[id];
-    $(id).addEventListener('click', func, false);
-  }
-
-  $('reload').addEventListener('click', reloadScene, false);
+  document.getElementById('scene').addEventListener('change', function() {
+    var scene = this.value;
+    var func = idFuncHash[scene];
+    if (func)
+      func();
+  }, false);
+  document.getElementById('reload').addEventListener('click', reloadScene, false);
 
   rendererContainer.addEventListener('mousedown', onMouseDown, false);
   rendererContainer.addEventListener('mouseup', onMouseUp, false);
@@ -224,7 +221,7 @@ function init() {
 }
 
 function pollForRendererResize() {
-  var rendererContainer = $('rendererContainer');
+  var rendererContainer = document.getElementById('rendererContainer');
   var w = rendererContainer.clientWidth;
   var h = rendererContainer.clientHeight;
   if (w == lastRendererWidth && h == lastRendererHeight)
@@ -270,7 +267,7 @@ function onMouseUp(event) {
 function onMouseMove( event ) {
   event.preventDefault();
 
-  var clientRect = $('rendererContainer').getClientRects()[0];
+  var clientRect = document.getElementById('rendererContainer').getClientRects()[0];
   var x = event.clientX - clientRect.left;
   var y = event.clientY - clientRect.top;
   var w = clientRect.width;
