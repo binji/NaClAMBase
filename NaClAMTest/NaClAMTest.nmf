@@ -1,5 +1,0 @@
-{
-  "program": {
-    "x86-64": {"url": "newlib/NaClAMTest.nexe"}
-  }
-}
